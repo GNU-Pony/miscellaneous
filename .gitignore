@@ -1,0 +1,11 @@
+_/
+__pycache__/
+\#*\#
+.*
+!.git*
+*~
+*.pyo
+*.pyc
+*.bak
+*.swo
+*.swp
