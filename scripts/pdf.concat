@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -e concatenated.pdf ]; then
+    echo 'File concatenated.pdf already exists'
+else
+    gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=concatenated.pdf "$@"
+fi
+

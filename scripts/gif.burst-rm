@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for image in "$@"; do
+    convert -coalesce "$image" "$image".%d.gif && rm "$image"
+done
+

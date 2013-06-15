@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ "${GPG_KEY}" = "" ]; then
+    echo 'You must export GPG_KEY with you GPG key'
+    return 1
+else
+    for file in "$@"; do
+        gpg --encrypt -r "${GPG_KEY}" < "${file}" > "${file}.crypt"
+    done
+    echo -e '\e[01;34m-- Do not forget to shred. --\e[00m'
+fi
+

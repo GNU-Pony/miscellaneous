@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# = 4 ]; then
+    if [ -e "$4" ]; then
+        echo "File $4 already exists"
+    else
+        gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="$4" -dFirstPage="$1" -dLastPage="$2" "$3"
+    fi
+else
+    echo 'USAGE: pdf.cut <first page> <last page> <input file> <output file>'
+fi
+

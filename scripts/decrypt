@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ "${GPG_KEY}" = "" ]; then
+    echo 'You must export GPG_KEY with you GPG key'
+    return 1
+else
+    for file in "$@"; do
+        if [ "${file}" = "${file%*.crypt}" ]; then
+            gpg --decrypt < "${file}" > "${file%*.crypt}"
+        else
+            gpg --decrypt < "${file}" > "${file}.decrypted"
+        fi
+    done
+fi
+
