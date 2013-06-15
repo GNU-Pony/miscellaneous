@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# cat with invisible output for password masking
+function blackcat
+{
+    echo -en '\e[00;30;40m'
+    cat "$@"
+    echo -en '\e[00m'
+}
+
