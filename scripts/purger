@@ -2,5 +2,5 @@
 
 (find -print0 -name '*~' 2>/dev/null ; find -print0 -name '#*#' 2>/dev/null) | xargs -0 rm 2>/dev/null
 
-return 0
+exit 0
 
