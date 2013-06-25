@@ -1,6 +1,6 @@
 #!/bin/sh
 
-(find -print0 -name '*~' 2>/dev/null ; find -print0 -name '#*#' 2>/dev/null) | xargs -0 rm 2>/dev/null
+(find -name '*~' -print0 2>/dev/null ; find -name '#*#' -print0 2>/dev/null) | xargs -0 rm 2>/dev/null
 
 exit 0
 
