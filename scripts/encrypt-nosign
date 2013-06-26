@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ "${GPG_KEY}" = "" ]; then
     echo 'You must export GPG_KEY with you GPG key'

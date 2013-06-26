@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 uuid="$(uuidgen)"
 mkdir -p ".tjära/${uuid}"

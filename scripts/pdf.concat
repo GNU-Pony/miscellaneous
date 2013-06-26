@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -e concatenated.pdf ]; then
     echo 'File concatenated.pdf already exists'

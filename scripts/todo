@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 for todo in xxx todo fixme; do
     grep -rinI --colour=always $todo | grep -v "$(echo -e '^\e\\[.*m\e\\[K\\.')"

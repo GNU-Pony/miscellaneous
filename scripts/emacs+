@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #Wrapper for emacs to make it better for the terminal.
 
 export TERM='xterm'
