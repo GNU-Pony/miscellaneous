@@ -1,0 +1,22 @@
+#!/bin/bash
+
+function 8ball
+{
+    # Negative
+    alts=( '1mDo not count on it' '1mMy reply is no' '1mMy sources say no' '1mOutlook not so good' '1mVery doubtful' )
+    
+    # Affermative
+    alts+=( '2mIt is certain' '2mIt is decidedly so' '2mWithout a doubt' '2mYes definitely' '2mYou may rely on it' )
+    alts+=( '2mAs I see it yes' '2mMost likely' '2mOutlook good' '2mYes' '2mSigns point to yes' )
+    
+    # Non-committal
+    alts+=( '3mReply hazy try again' '3mAsk again later' '3mBetter not tell you now' '3mCannot predict now' '3mConcentrate and ask again' )
+    
+    # Broken 8-Ball
+    alts+=( '4mThe Magic 8-Ball is not working too good, you did not get an answer. Try again.' )
+    alts+=( '4mThe blue dye is too thick, you cannot read the answer. Try again.' )
+    alts+=( '4mDid you know that the Magic 8-Ball contains alcohol?' )
+    
+    echo -e "\n    \033[01;3${alts[$(( ${RANDOM} % ${#alts[@]} ))]}\e[00m\n"
+}
+
