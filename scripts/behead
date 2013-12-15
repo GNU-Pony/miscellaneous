@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+beheading="$1"
+
+data="$(cat)"
+lines="$(echo "${data}" | wc -l)"
+lines=$(( ${lines} - ${beheading} ))
+
+if (( $lines > 0 )); then
+    echo "$(echo "${data}" | tail -n ${lines})"
+fi
+
+
