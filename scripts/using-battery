@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# Returns 0 if computer is using battery
+#         1 if comouter is using AC power
+#         128 if not detectable, in which case it is probably
+#             missing a battery component and run on AC because
+#             it is a stationary computer
+
+
+for file in /sys/class/power_supply/*/online; do
+    if [ -f "${file}" ]; then
+	exit $(cat "${file}")
+    fi
+done
+
+
+for file in /proc/acpi/ac_adapter/*/state; do
+    if [ -f "${file}" ]; then
+	cat "${file}" | grep '^state:.*off-line$' >/dev/null
+	exit $?
+    fi
+done
+
+
+if [ -f "/proc/pmu/info" ]; then
+    cat /proc/pmu/info | grep '^AC Power.*: 0$' >/dev/null
+    exit $?
+fi
+
+
+if sysctl -q hw.acpi.acline >/dev/null 2>&1; then
+    [ "$(sysctl -n hw.acpi.acline)" = 0 ]
+    exit $?
+fi
+
+
+exit 128
+
