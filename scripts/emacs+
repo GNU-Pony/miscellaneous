@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #Wrapper for emacs to make it better for the terminal.
 
-export TERM='xterm'
 if [ "$TERM" = "linux" ]; then
+    export TERM='xterm'
     echo -en '\e[?8c'
     emacs -nw "$@"
     echo -en '\e[?8c'
