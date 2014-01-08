@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ ! $# = 3 ]; then
+    echo 'USAGE: video_file audio_file output_file'
+    echo
+else
+    ffmpeg -i "$1" -i "$2" -vcodec copy -acodec copy -acodec copy -- "$3"
+fi
+
