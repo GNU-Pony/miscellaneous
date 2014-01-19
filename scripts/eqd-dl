@@ -1,0 +1,28 @@
+#!/bin/bash
+
+page="$(wget "$1" -O - 2>/dev/null)"
+sources="$(echo "$page" | grep '<iframe' | grep -Po 'src="(.+)"' | cut -d ' ' -f 1 | sed -e 's_src=__g' -e s_\"__g)"
+i=1
+
+function title
+{
+    grep "^$1\.)" |
+    sed -e "s:^$1\.)::" |
+    sed -e 's:<[^>]*>::g' |
+    sed -e 's:^ ::' -e 's: $::' |
+    sed -e 's:\&gt;:>:g' -e 's:\&lt;:<:g' |
+    sed -e 's:\&amp:\&:g'
+}
+
+echo "$sources" |
+while read url; do
+    youtube-dl "$url" 2>&1 |
+    tee /dev/stderr |
+    grep '.download. Destination: ' |
+    sed -e 's_.download. Destination: __g' |
+    while read line; do
+        mv -- "$line" "${2:-.}/$(echo "$page" | title $i | sed -e 's:/:[S]:g').${line##*.}"
+    done
+    (( i++ ))
+done
+
