@@ -1,0 +1,4 @@
+#!/bin/sh
+
+curl -s checkip.dyndns.org | grep -o -E '[0-9\.]+'
+

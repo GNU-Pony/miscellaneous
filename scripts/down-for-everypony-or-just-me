@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if curl -s "http://www.downforeveryoneorjustme.com/${1}" | grep 'not just you' > /dev/null; then
+    echo 'No, it is not just you.'
+else
+    echo 'Yes, it is just you.'
+fi
+
