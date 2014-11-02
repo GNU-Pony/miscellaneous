@@ -1,13 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-beheading="$1"
-
-data="$(cat)"
-lines="$(echo "${data}" | wc -l)"
-lines=$(( ${lines} - ${beheading} ))
-
-if (( $lines > 0 )); then
-    echo "$(echo "${data}" | tail -n ${lines})"
+if [ "${1}" = 0 ]; then
+    cat
+else
+    sed "1,${1}d"
 fi
-
 
