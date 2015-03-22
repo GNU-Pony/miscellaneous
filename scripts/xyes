@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+fd=3
+while [ -e /proc/$$/fd/$fd ] || [ -L /proc/$$/fd/$fd ]; do
+    : $(( fd++ ))
+    echo $fd
+done
+
+eval "exec $fd<&0"
+
+yes | xargs --arg-file=<(cat <&$fd) "$@"
+
+eval "exec $fd<&-"
+
