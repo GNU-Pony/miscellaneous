@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+if [ -n "${PDF_VIEWER}" ]; then
+    pdfviewer="${PDF_VIEWER}"
+elif [ "${TERM}" = linux ]; then
+    pdfviewer=jfbview
+else
+    pdfviewer=atril
+fi
+
+manpage="$1"
+shift 1
+
+pdffile="$(mktemp --suffix=.pdf)"
+(
+    man -t "${manpage}" 2>/dev/null | ps2pdf - "${pdffile}" 2>/dev/null
+    ${pdfviewer} "$@" -- "${pdffile}"
+)
+ev=$?
+unlink -- "${pdffile}"
+exit $ev
+
