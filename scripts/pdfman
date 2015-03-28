@@ -13,7 +13,7 @@ shift 1
 
 pdffile="$(mktemp --suffix=.pdf)"
 (
-    man -t "${manpage}" 2>/dev/null | ps2pdf - "${pdffile}" 2>/dev/null
+    mispipe "man -t '${manpage}'" "ps2pdf - '${pdffile}'" 2>/dev/null
     ${pdfviewer} "$@" -- "${pdffile}"
 )
 ev=$?
