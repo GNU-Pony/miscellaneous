@@ -8,13 +8,10 @@ else
     pdfviewer=atril
 fi
 
-manpage="$1"
-shift 1
-
 pdffile="$(mktemp --suffix=.pdf)"
 (
-    mispipe "man -t '${manpage}'" "ps2pdf - '${pdffile}'" 2>/dev/null
-    ${pdfviewer} "$@" -- "${pdffile}"
+    mispipe "man -t $*" "ps2pdf - '${pdffile}'" 2>/dev/null
+    ${pdfviewer} -- "${pdffile}"
 )
 ev=$?
 unlink -- "${pdffile}"
