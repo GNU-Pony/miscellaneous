@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -e
+
+if [ $# = 5 ]; then
+    pagecount="$1"
+    inputfile="$2"
+    outputdir="$3"
+    offset="$4"
+    multiplier="$5"
+    if [ ! -e "${inputfile}" ]; then
+        echo "File ${inputfile} does not exist"
+	exit 1
+    fi
+    mkdir -p -- "${outputdir}"
+    for p in $(seq -- "${pagecount}"); do
+	n=$(( (p - 1) * ${multiplier} + ${offset} ))
+	outputfile="${outputdir}/${n}.pdf"
+	if [ -e "${outputfile}" ]; then
+	    echo "File ${outputfile} already exists"
+	    exit 1
+	fi
+    done
+    for p in $(seq -- "${pagecount}"); do
+	n=$(( (p - 1) * ${multiplier} + ${offset} ))
+	outputfile="${outputdir}/${n}.pdf"
+	gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile="${outputfile}" -dFirstPage="${p}" -dLastPage="${p}" "${inputfile}"
+    done
+else
+    echo 'USAGE: pdf.burst <page count> <input file> <output directory> <offset> <multiplier>'
+fi
+
