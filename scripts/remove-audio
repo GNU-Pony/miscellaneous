@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ ! $# = 2 ]; then
+    echo 'USAGE: input_file output_file'
+    echo
+else
+    ffmpeg -i "$1" -vcodec copy -an -- "$3"
+fi
+
