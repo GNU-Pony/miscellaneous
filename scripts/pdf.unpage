@@ -2,7 +2,7 @@
 
 if [ ! $# = 4 ]; then
     echo "USAGE: pdf.unpage <page to remove> <last page> <input file> <output file>"
-    return 1
+    exit 1
 elif [ -e "$3"~ ]; then   echo -e '\033[31m'"$3"'~ already exists\033[00m'
 elif [ -e a.pdf ]; then   echo -e '\033[31ma.pdf already exists\033[00m'
 elif [ -e b.pdf ]; then   echo -e '\033[31mb.pdf already exists\033[00m'
