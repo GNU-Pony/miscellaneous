@@ -1,0 +1,35 @@
+#!/bin/sh
+
+n=1
+s=6
+ok=1
+
+if test $# = 2; then
+    n="$1"
+    s="$2"
+elif test $# = 1; then
+    s="$1"
+elif test $# = 0; then
+    :
+else
+    ok=0
+fi
+
+if test -z "$n" || test -z "$s"; then
+    ok=0
+elif test -n "$(echo "$n" | tr -d 0123456789)"; then
+    ok=0
+elif test -n "$(echo "$s" | tr -d 0123456789)"; then
+    ok=0
+elif test -z "$(echo "$s" | tr -d 0)"; then
+    ok=0
+fi
+
+if test $ok = 0; then
+    printf 'Usage: %s [[dices] sides]\n' "$0"
+    exit 1
+fi
+
+for i in $(seq $n); do
+    seq $s | shuf | sed 2,\$d
+done | xargs printf '%s ' | sed 's/ $/\n/'
